@@ -1,13 +1,16 @@
 import base64 from "base64-js"
 import {wrapUint8Array} from "../../util/wrapper";
 import {concatUint8Array} from "../../util/concat";
-import {uint32ToBigEndianUint8Array} from "../../util/converter";
+import {stringToUint8Array, uint32ToBigEndianUint8Array} from "../../util/converter";
+
+const defaultSignerAlgorithm = "ED25519"
 
 class Seal {
   constructor(msgHash, sig, pubKey) {
     this.hash = msgHash
     this.signature = sig
     this.publicKey = pubKey
+    this.algorithm = defaultSignerAlgorithm
   }
 
   static newBlankSeal() {
@@ -28,6 +31,7 @@ class Seal {
     newSeal.hash = wrapUint8Array(msgHash)
     newSeal.signature = wrapUint8Array(sig)
     newSeal.publicKey = wrapUint8Array(pubKey)
+    newSeal.algorithm = defaultSignerAlgorithm
 
     return newSeal
   }
@@ -37,6 +41,7 @@ class Seal {
       Hash: this.hash.base64,
       Signature: this.signature.base64,
       SignerPublicKey: this.publicKey.base64,
+      SignerAlgorithm: defaultSignerAlgorithm,
     }
   }
 
@@ -44,6 +49,9 @@ class Seal {
     let hashLenBytes = uint32ToBigEndianUint8Array(this.hash.u8Array.length)
     let sigLenBytes = uint32ToBigEndianUint8Array(this.signature.u8Array.length)
     let pubKeyLenBytes = uint32ToBigEndianUint8Array(this.publicKey.u8Array.length)
+
+    let algoLenBytes = uint32ToBigEndianUint8Array(this.algorithm.length)
+    let algoBytes = stringToUint8Array(this.algorithm)
 
     return concatUint8Array(
       hashLenBytes,
@@ -53,7 +61,10 @@ class Seal {
       this.signature.u8Array,
 
       pubKeyLenBytes,
-      this.publicKey.u8Array
+      this.publicKey.u8Array,
+
+      algoLenBytes,
+      algoBytes,
     )
   }
 
