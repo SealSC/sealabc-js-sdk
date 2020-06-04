@@ -50,8 +50,8 @@ class Seal {
     let sigLenBytes = uint32ToBigEndianUint8Array(this.signature.u8Array.length)
     let pubKeyLenBytes = uint32ToBigEndianUint8Array(this.publicKey.u8Array.length)
 
-    let algoLenBytes = uint32ToBigEndianUint8Array(this.algorithm.length)
     let algoBytes = stringToUint8Array(this.algorithm)
+    let algoLenBytes = uint32ToBigEndianUint8Array(algoBytes.length)
 
     return concatUint8Array(
       hashLenBytes,

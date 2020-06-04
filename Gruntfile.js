@@ -30,5 +30,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify-es');
 
+  grunt.registerTask('build-no-min', ['browserify']);
   grunt.registerTask('build', ['browserify', 'uglify']);
 };

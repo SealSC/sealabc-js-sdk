@@ -9,11 +9,6 @@ let textEncoder = new TextEncoder()
 let textDecoder = new TextDecoder()
 
 function stringToUint8Array(str) {
-  // let arr = [];
-  // for (let i = 0, j = str.length; i < j; ++i) {
-  //   arr.push(str.charCodeAt(i));
-  // }
-
   let arr = textEncoder.encode(str)
   return new Uint8Array(arr);
 }
@@ -86,6 +81,9 @@ function bigEndianUint8ArrayToUint64(u8Array) {
 }
 
 function hexToUint8Array(hex) {
+  if (!hex || hex === "") {
+    return new Uint8Array(0)
+  }
   return new Uint8Array(hex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
 }
 
