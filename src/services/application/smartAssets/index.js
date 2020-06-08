@@ -3,6 +3,7 @@ import {TransactionData} from "./dataType/transactionData";
 import {newTransferRequest} from "./requests/transaction/transfer";
 import {newContractCallRequest} from "./requests/transaction/contractCall";
 import {newContractCreationRequest} from "./requests/transaction/contractCreation";
+import {newContractOffChainCall} from "./requests/transaction/contractOffChainCall";
 
 let dataTypes = {
   Transaction,
@@ -13,6 +14,7 @@ let requests = {
   newTransferRequest,
   newContractCallRequest,
   newContractCreationRequest,
+  newContractOffChainCall,
 }
 
 let smartAssets = {

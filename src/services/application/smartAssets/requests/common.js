@@ -16,10 +16,6 @@ function randomSN() {
 }
 
 function newTx(tools, type, from, to, value, data = "", memo = "", sn = "") {
-  if (!(tools instanceof CryptoTools)) {
-    throw new Error("must sppuly a CryptoTools Object")
-  }
-
   let txData = new TransactionData()
 
   txData.type = type
@@ -32,8 +28,9 @@ function newTx(tools, type, from, to, value, data = "", memo = "", sn = "") {
 
   let tx = new Transaction(txData)
 
-
-  tx.sign(tools)
+if (tools instanceof CryptoTools) {
+    tx.sign(tools)
+  }
 
   return tx
 }

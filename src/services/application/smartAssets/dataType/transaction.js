@@ -13,12 +13,16 @@ import {wrapUint8Array} from "../../../../util/wrapper";
 
 function Transaction(txData) {
   this.data = txData
-  this.seal = new Seal()
+  this.seal = null
 
   this.toJSON = ()=> {
-    let obj = Object.assign({
-      DataSeal: this.seal.getDataInBase64()
-    }, this.data.toPlainObject())
+    let obj = {}
+    if(this.seal !== null) {
+      obj = {
+        DataSeal: this.seal.getDataInBase64()
+      }
+    }
+    obj = Object.assign(obj, this.data.toPlainObject())
     return JSON.stringify(obj)
   }
 
