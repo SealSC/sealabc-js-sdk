@@ -35,8 +35,7 @@
     "json-beautify": "^1.1.1",
     "jssha": "^2.3.1",
     "randombytes": "^2.1.0",
-    "tweetnacl": "^1.0.1",
-    "web3-eth-contract": "^1.2.8"
+    "tweetnacl": "^1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -62,6 +61,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/runtime": "^7.4.4",
     "babelify": "^10.0.0",
+    "web3-eth-contract": "^1.2.8",
     "grunt": "^1.1.0",
     "grunt-browserify": "^5.3.0",
     "grunt-contrib-uglify-es": "^3.3.0",
