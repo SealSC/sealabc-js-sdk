@@ -44,8 +44,18 @@ function newRequest(tx, tools) {
   )
 }
 
+
+function newQuery(queryType, param) {
+  return {
+    QueryType: queryType,
+    Parameter: param
+  }
+}
+
+
 export {
   smartAssetsAppName,
   newTx,
   newRequest,
+  newQuery,
 }
