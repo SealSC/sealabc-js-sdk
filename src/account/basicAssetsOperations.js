@@ -6,7 +6,6 @@ import {Seal} from "../services/common/seal";
 import {basicAssets} from "../services/application/basicAssets";
 import {basicAssetsAppName} from "../services/application/basicAssets/requests/common/common";
 import BN from "bn.js"
-import {ApiClient} from "../network/apiClient";
 import {OperationBase} from "./operationBase";
 
 class BasicAssetsOperations extends OperationBase {
@@ -14,14 +13,6 @@ class BasicAssetsOperations extends OperationBase {
     super(signer)
     this.apiClient = apiClient
     this.assetsList = null
-  }
-
-  setApiClient(apiClient) {
-    if(!(apiClient instanceof ApiClient)) {
-      throw new Error("invavlid parameter, we need ApiClient to send query request.")
-    }
-
-    this.apiClient = apiClient
   }
 
   async loadBasicAssets() {

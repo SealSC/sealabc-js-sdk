@@ -9,6 +9,7 @@ import {AccountBase} from "./base";
 import {BasicAssetsOperations} from "./basicAssetsOperations";
 import {ApiClient} from "../network/apiClient";
 import {MemoOperations} from "./memoOperations";
+import {SmartAssetsOperations} from "./smartAssetsOperations";
 
 let allMode = {
   "CBC": cryptoJS.mode.CBC,
@@ -22,6 +23,7 @@ class Account extends AccountBase {
     super(signer, apiClient)
     this.basicAssets = new BasicAssetsOperations(this.signer, apiClient)
     this.memo = new MemoOperations(this.signer, apiClient)
+    this.smartAssets = new SmartAssetsOperations(this.signer, apiClient)
   }
 
   setApiClient(apiClient) {
@@ -32,6 +34,7 @@ class Account extends AccountBase {
     this.apiClient = apiClient
     this.basicAssets.setApiClient(apiClient)
     this.memo.setApiClient(apiClient)
+    this.smartAssets.setApiClient(apiClient)
   }
 
   static onlyForVerify(publicKey) {

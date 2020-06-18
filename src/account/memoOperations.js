@@ -1,18 +1,9 @@
-import {ApiClient} from "../network/apiClient";
 import {OperationBase} from "./operationBase";
 import {memoService} from "../services/application/memoService";
 
 class MemoOperations extends OperationBase {
   constructor(signer = null, apiClient = null) {
     super(signer)
-    this.apiClient = apiClient
-  }
-
-  setApiClient(apiClient) {
-    if(!(apiClient instanceof ApiClient)) {
-      throw new Error("invalid parameter, we need ApiClient to send query request.")
-    }
-
     this.apiClient = apiClient
   }
 
