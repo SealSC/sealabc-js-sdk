@@ -1,4 +1,5 @@
 import {
+  stringToBase64,
   stringToUint8Array,
   uint32ToBigEndianUint8Array, uint8ArrayToString
 } from "../../../../util/converter"
@@ -14,6 +15,7 @@ function Transaction() {
   this.txType = ""
   this.assets = new Assets()
   this.data = ""
+  this.extraData = ""
 
   this.seal = null
 
@@ -62,6 +64,9 @@ function Transaction() {
     let inputData = getUTXODataForSeal(inputList)
     let outputData = getUTXODataForSeal(outputLit)
 
+    let extraData = stringToUint8Array(this.extraData)
+    let extraDataLen = uint32ToBigEndianUint8Array(extraData.length)
+
     return concatUint8Array(
       txTypeLenBytes,
       txTypeBytes,
@@ -74,6 +79,9 @@ function Transaction() {
 
       inputData,
       outputData,
+
+      extraDataLen,
+      extraData,
     )
   }
 
@@ -94,12 +102,14 @@ function Transaction() {
   }
 
   this.toJSON = ()=> {
+    let extraData = stringToUint8Array(this.extraData)
     return JSON.stringify({
       TxType: this.txType,
       Assets: this.assets.toPlainObject(),
       Memo: this.data,
       Input: getUTXOPlainObject(inputList),
       Output: getUTXOPlainObject(outputLit),
+      ExtraData: wrapUint8Array(extraData).base64,
       CreateTime: Math.ceil(Date.now() / 1000),
       Seal: this.seal.getDataInBase64(),
     })

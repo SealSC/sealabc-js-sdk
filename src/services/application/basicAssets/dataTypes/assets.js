@@ -1,17 +1,19 @@
 import {
-  boolToUint8Array,
+  boolToUint8Array, stringToBase64,
   stringToUint8Array,
   uint32ToBigEndianUint8Array, uint64ToBigEndianUint8Array
 } from "../../../../util/converter"
 
 import {concatUint8Array} from "../../../../util/concat"
 import {Seal} from "../../../common/seal";
+import {wrapUint8Array} from "../../../../util/wrapper";
 
 function Assets() {
   this.name = ""
   this.symbol = ""
   this.supply = "0"
   this.increasable = false
+  this.extraData = ""
 
   this.issuedSeal = null
   this.metaSeal = null
@@ -31,6 +33,9 @@ function Assets() {
     let increasableBytes = boolToUint8Array(this.increasable)
     let increasableLenBytes = uint32ToBigEndianUint8Array(1)
 
+    let extraData = stringToUint8Array(this.extraData)
+    let extraDataLen = uint32ToBigEndianUint8Array(extraData.length)
+
     let issuedData = concatUint8Array(
       nameLenBytes,
       nameBytes,
@@ -43,6 +48,9 @@ function Assets() {
 
       increasableLenBytes,
       increasableBytes,
+
+      extraDataLen,
+      extraData,
     )
 
     let metaData = concatUint8Array(
@@ -57,6 +65,9 @@ function Assets() {
 
       increasableLenBytes,
       increasableBytes,
+
+      extraDataLen,
+      extraData,
     )
 
     return {
@@ -76,12 +87,13 @@ function Assets() {
   }
 
   this.toPlainObject = () => {
+    let extraData = stringToUint8Array(this.extraData)
     return {
       Name: this.name,
       Symbol: this.symbol,
       Supply: this.supply,
       Increasable: this.increasable,
-
+      ExtraInfo: wrapUint8Array(extraData).base64,
       IssuedSeal: this.issuedSeal.getDataInBase64(),
       MetaSeal: this.metaSeal.getDataInBase64(),
     }
@@ -118,13 +130,14 @@ function Assets() {
   }
 }
 
-function buildAssets(name, symbol, supply, increasable) {
+function buildAssets(name, symbol, supply, increasable, extraData = "") {
   let assets = new Assets()
 
   assets.name = name
   assets.symbol = symbol
   assets.supply = supply
   assets.increasable = increasable
+  assets.extraData = extraData
 
   return assets
 }

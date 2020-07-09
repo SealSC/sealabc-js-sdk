@@ -3,7 +3,7 @@ import {CryptoTools} from "../../../../../crypto/tools";
 import {newBlockchainRequest} from "../../../../system/blockchain/blockchainRequest";
 import {basicAssetsAppName, buildData} from "../common/common";
 
-function newIssueAssetsRequest(assets, tools, txMemo = "", extraData = "") {
+function newStartSellingRequest(assets, inputList, tools, sellingData, txMemo = "") {
   if (!(assets instanceof Assets)) {
     throw new Error("input must be an Assets Object")
   }
@@ -12,9 +12,9 @@ function newIssueAssetsRequest(assets, tools, txMemo = "", extraData = "") {
     throw new Error("must sppuly a CryptoTools Object")
   }
 
-  let tx = buildData("IssueAssets", txMemo, assets)
-
+  let tx = buildData("StartSelling", txMemo, assets, inputList, [], sellingData)
   tx.sign(tools)
+
   return newBlockchainRequest(
     basicAssetsAppName,
     tx.txType,
@@ -24,5 +24,5 @@ function newIssueAssetsRequest(assets, tools, txMemo = "", extraData = "") {
 }
 
 export {
-  newIssueAssetsRequest,
+  newStartSellingRequest,
 }

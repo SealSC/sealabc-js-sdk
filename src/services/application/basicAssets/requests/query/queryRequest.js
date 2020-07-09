@@ -40,7 +40,15 @@ function newQueryUnspent(address, assets = null) {
   }
 }
 
+function newQuerySellingList() {
+  return {
+    DBType: "KV",
+    QueryType: "SellingList",
+    Parameter: [],
+  }
+}
 
 export {
   newQueryUnspent,
+  newQuerySellingList,
 }

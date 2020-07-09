@@ -1,15 +1,23 @@
 import {Assets, buildAssets} from "./datatypes/assets";
+import {SellingData, buildSellingData} from "./dataTypes/sellingData";
 import {Transaction} from "./datatypes/transaction";
 import {UTXOInput} from "./datatypes/utxoInput";
 import {UTXOOutput} from "./datatypes/utxoOutput";
 
 import {newIssueAssetsRequest} from "./requests/transaction/issueAssetsRequest";
 import {newTransferRequest} from "./requests/transaction/transferRequest";
-import {newQueryUnspent} from "./requests/query/queryRequest";
+import {newStartSellingRequest} from "./requests/transaction/startSelling";
+import {newStopSellingRequest} from "./requests/transaction/stopSelling";
+import {newBuyAssetsRequest} from "./requests/transaction/buyAssets";
+
+import {newQueryUnspent, newQuerySellingList} from "./requests/query/queryRequest";
 
 let dataTypes = {
   Assets,
   buildAssets,
+
+  SellingData,
+  buildSellingData,
 
   Transaction,
   UTXOInput,
@@ -18,9 +26,14 @@ let dataTypes = {
 
 let requests = {
   newQueryUnspent,
+  newQuerySellingList,
 
   newIssueAssetsRequest,
   newTransferRequest,
+
+  newStartSellingRequest,
+  newStopSellingRequest,
+  newBuyAssetsRequest,
 }
 
 let basicAssets = {
