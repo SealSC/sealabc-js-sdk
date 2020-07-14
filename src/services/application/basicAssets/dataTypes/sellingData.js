@@ -1,8 +1,8 @@
 import {hexToBase64} from "../../../../util/converter"
 
 function SellingData() {
-  this.price = 0
-  this.amount = 1
+  this.price = "0"
+  this.amount = "1"
   this.seller = ""
   this.sellingAssets = ""
   this.paymentAssets = ""

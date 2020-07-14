@@ -10,7 +10,7 @@ import {newStartSellingRequest} from "./requests/transaction/startSelling";
 import {newStopSellingRequest} from "./requests/transaction/stopSelling";
 import {newBuyAssetsRequest} from "./requests/transaction/buyAssets";
 
-import {newQueryUnspent, newQuerySellingList} from "./requests/query/queryRequest";
+import {newQueryUnspent, newQuerySellingList, newQueryAllAssets} from "./requests/query/queryRequest";
 
 let dataTypes = {
   Assets,
@@ -27,6 +27,7 @@ let dataTypes = {
 let requests = {
   newQueryUnspent,
   newQuerySellingList,
+  newQueryAllAssets,
 
   newIssueAssetsRequest,
   newTransferRequest,

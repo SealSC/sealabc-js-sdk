@@ -1,4 +1,5 @@
 import {
+  base64ToString,
   boolToUint8Array, stringToBase64,
   stringToUint8Array,
   uint32ToBigEndianUint8Array, uint64ToBigEndianUint8Array
@@ -99,6 +100,16 @@ function Assets() {
     }
   }
 
+  this.fromPlainObject = (obj) => {
+    this.name = obj.Name
+    this.symbol = obj.Symbol
+    this.increasable = obj.IncomingMessage
+    this.supply = obj.Supply
+    this.extraData = base64ToString(obj.ExtraInfo)
+    this.issuedSeal = Seal.fromPlainObject(obj.IssuedSeal)
+    this.metaSeal = Seal.fromPlainObject(obj.MetaSeal)
+  }
+
   this.toJSON = ()=> {
     return JSON.stringify(this.toPlainObject())
   }
@@ -142,7 +153,22 @@ function buildAssets(name, symbol, supply, increasable, extraData = "") {
   return assets
 }
 
+function blankAssets(cryptoTools) {
+  let assets = new Assets()
+
+  assets.name = ""
+  assets.symbol = ""
+  assets.supply = "0"
+  assets.increasable = false
+  assets.extraData = ""
+
+  assets.sign(cryptoTools)
+
+  return assets
+}
+
 export {
   Assets,
-  buildAssets
+  buildAssets,
+  blankAssets
 }

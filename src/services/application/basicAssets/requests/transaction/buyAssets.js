@@ -5,7 +5,7 @@ import {basicAssetsAppName, buildData} from "../common/common";
 
 function newBuyAssetsRequest(assets, inputList, outputList, tools, txMemo = "") {
   if (!(assets instanceof Assets)) {
-    throw new Error("input must be an Assets Object")
+    throw new Error("assets must be an Assets Object")
   }
 
   if (!(tools instanceof CryptoTools)) {

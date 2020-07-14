@@ -30,15 +30,13 @@ function stringToBase64(str) {
   return b64.fromByteArray(u8)
 }
 
+function base64ToString(b64Str) {
+  let u8Array = b64.toByteArray(b64Str)
+  return uint8ArrayToString(u8Array)
+}
+
 function uint8ArrayToString(u8Array) {
-  // let str = ""
-  // for (let i = 0; i < u8Array.length; i++) {
-  //   str += String.fromCharCode(u8Array[i])
-  // }
-
-  let str = textDecoder.decode(u8Array)
-
-  return str
+  return textDecoder.decode(u8Array)
 }
 
 function boolToUint8Array(b) {
@@ -171,6 +169,7 @@ export {
   stringToUint8ArrayWithLength,
   uint8ArrayToString,
   stringToBase64,
+  base64ToString,
 
   boolToUint8Array,
   uint8ArrayToBool,
