@@ -9,11 +9,15 @@ import {concatUint8Array} from "../../../../util/concat"
 import {Seal} from "../../../common/seal";
 import {wrapUint8Array} from "../../../../util/wrapper";
 
+const GeneralAssets = "0"
+const CopyrightAssets = "1"
+
 function Assets() {
   this.name = ""
   this.symbol = ""
   this.supply = "0"
   this.increasable = false
+  this.type = ""
   this.extraData = ""
 
   this.issuedSeal = null
@@ -31,6 +35,9 @@ function Assets() {
     let zeroSupplyBytes = uint64ToBigEndianUint8Array(0)
     let supplyLenBytes = uint32ToBigEndianUint8Array(8)
 
+    let typeBytes = uint32ToBigEndianUint8Array(this.type)
+    let typeLen = uint32ToBigEndianUint8Array(typeBytes.length)
+
     let increasableBytes = boolToUint8Array(this.increasable)
     let increasableLenBytes = uint32ToBigEndianUint8Array(1)
 
@@ -46,6 +53,9 @@ function Assets() {
 
       supplyLenBytes,
       supplyBytes,
+
+      typeLen,
+      typeBytes,
 
       increasableLenBytes,
       increasableBytes,
@@ -63,6 +73,9 @@ function Assets() {
 
       supplyLenBytes,
       zeroSupplyBytes,
+
+      typeLen,
+      typeBytes,
 
       increasableLenBytes,
       increasableBytes,
@@ -93,6 +106,7 @@ function Assets() {
       Name: this.name,
       Symbol: this.symbol,
       Supply: this.supply,
+      Type: this.type,
       Increasable: this.increasable,
       ExtraInfo: wrapUint8Array(extraData).base64,
       IssuedSeal: this.issuedSeal.getDataInBase64(),
@@ -147,7 +161,21 @@ function buildAssets(name, symbol, supply, increasable, extraData = "") {
   assets.name = name
   assets.symbol = symbol
   assets.supply = supply
+  assets.type = GeneralAssets
   assets.increasable = increasable
+  assets.extraData = extraData
+
+  return assets
+}
+
+function buildCopyright(name, symbol, extraData) {
+  let assets = new Assets()
+
+  assets.name = name
+  assets.symbol = symbol
+  assets.supply = "1"
+  assets.type = CopyrightAssets
+  assets.increasable = false
   assets.extraData = extraData
 
   return assets
@@ -159,6 +187,7 @@ function blankAssets(cryptoTools) {
   assets.name = ""
   assets.symbol = ""
   assets.supply = "0"
+  assets.type = GeneralAssets
   assets.increasable = false
   assets.extraData = ""
 
@@ -170,5 +199,6 @@ function blankAssets(cryptoTools) {
 export {
   Assets,
   buildAssets,
-  blankAssets
+  blankAssets,
+  buildCopyright,
 }

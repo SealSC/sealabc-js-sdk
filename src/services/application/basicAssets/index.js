@@ -1,4 +1,4 @@
-import {Assets, buildAssets} from "./datatypes/assets";
+import {Assets, buildAssets, buildCopyright} from "./datatypes/assets";
 import {SellingData, buildSellingData} from "./dataTypes/sellingData";
 import {Transaction} from "./datatypes/transaction";
 import {UTXOInput} from "./datatypes/utxoInput";
@@ -15,6 +15,7 @@ import {newQueryUnspent, newQuerySellingList, newQueryAllAssets} from "./request
 let dataTypes = {
   Assets,
   buildAssets,
+  buildCopyright,
 
   SellingData,
   buildSellingData,
