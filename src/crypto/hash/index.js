@@ -1,6 +1,6 @@
-import JSSha from "jssha"
+import sha3 from "js-sha3"
 import cryptoJS from "crypto-js"
-import {wordArrayToUint8Array} from "../../util/converter"
+import {hexToUint8Array, wordArrayToUint8Array} from "../../util/converter"
 import {wrapUint8Array} from "../../util/wrapper";
 
 class HashCalculator {
@@ -8,19 +8,16 @@ class HashCalculator {
 }
 
 class Sha3 extends HashCalculator{
-  sum256(message, type = "ARRAYBUFFER") {
-    let sha = new JSSha("SHA3-256", type)
-    sha.update(message)
-    return wrapUint8Array(new Uint8Array(sha.getHash("ARRAYBUFFER")))
+  sum256(message) {
+    let hash = sha3.sha3_256(message)
+    return wrapUint8Array(hexToUint8Array(hash))
   }
 }
 
 class Keccak extends HashCalculator{
   sum256 (message) {
-    let hashWords = cryptoJS.SHA3(message, { outputLength: 256 })
-    let hashBytes = wordArrayToUint8Array(hashWords)
-
-    return wrapUint8Array(hashBytes)
+    let hash = sha3.keccak256(message)
+    return wrapUint8Array(hexToUint8Array(hash))
   }
 
   //todo: other bits

@@ -55,6 +55,13 @@ function buildTransferInOut(receiver, amount, utxoList) {
   }
 }
 
+async function doAssetIssue(assets, memo) {
+  let tools = this.cryptoTools()
+  assets.sign(tools)
+  let issueReq = basicAssets.requests.newIssueAssetsRequest(assets, tools, memo)
+  return this.apiClient.callApplication(issueReq.toJSON())
+}
+
 class BasicAssetsOperations extends OperationBase {
   constructor(signer = null, apiClient = null) {
     super(signer)
@@ -124,10 +131,21 @@ class BasicAssetsOperations extends OperationBase {
       increasable,
     )
 
-    let tools = this.cryptoTools()
-    assets.sign(tools)
-    let issueReq = basicAssets.requests.newIssueAssetsRequest(assets, tools, memo)
-    return await this.apiClient.callApplication(issueReq.toJSON())
+    return await doAssetIssue.call(this, assets, memo)
+  }
+
+  async confirmCopyright(name, symbol, extraData = "", memo = "") {
+    if(!this.apiClient) {
+      return
+    }
+
+    let assets = basicAssets.dataTypes.buildCopyright(
+      name,
+      symbol,
+      extraData,
+    )
+
+    return await doAssetIssue.call(this, assets, memo)
   }
 
   async transferTo(receiver, assetsHash, amount, memo = "") {

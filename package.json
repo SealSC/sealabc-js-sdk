@@ -32,8 +32,8 @@
     "crypto-js": "3.3.0",
     "fast-text-encoding": "^1.0.1",
     "is-base64": "^1.1.0",
+    "js-sha3": "^0.8.0",
     "json-beautify": "^1.1.1",
-    "jssha": "^2.3.1",
     "randombytes": "^2.1.0",
     "tweetnacl": "^1.0.1"
   },
