@@ -109,6 +109,10 @@ class AccountBase {
     return this.signer.keyPair.publicKey.base64
   }
 
+  addressHex() {
+    return this.signer.keyPair.publicKey.base64
+  }
+
   cryptoTools() {
     return new crypto.Tools(crypto.algorithm.hash.Sha3, this.signer)
   }
@@ -119,7 +123,7 @@ class AccountBase {
 
   seal(data, hashCalc = null) {
     if (null === hashCalc) {
-      hashCalc = hash.Sha3
+      hashCalc = crypto.algorithm.hash.Sha3
     } else if (!(hashCalc instanceof HashCalculator)) {
       throw new Error("invalid hash calculator")
     }

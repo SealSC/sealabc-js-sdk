@@ -24,6 +24,10 @@ class Signer {
     return this.keyPair.privateKey
   }
 
+  name() {
+    return "unknown"
+  }
+
   sign(message) {
     return null
   }

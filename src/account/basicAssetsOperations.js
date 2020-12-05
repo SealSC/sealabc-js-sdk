@@ -42,7 +42,7 @@ function buildTransferInOut(receiver, amount, utxoList) {
       let newInput = new basicAssets.dataTypes.UTXOInput(utxo.Transaction, utxo.OutputIndex)
       input.push(newInput)
 
-      let newOutput = new basicAssets.dataTypes.UTXOOutput(receiver, stillNeed.toString(10))
+      let newOutput = new basicAssets.dataTypes.UTXOOutput(receiver, uv.toString(10))
       output.push(newOutput)
 
       amountAcc = nextAcc

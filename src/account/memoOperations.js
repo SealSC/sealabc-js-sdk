@@ -7,6 +7,17 @@ class MemoOperations extends OperationBase {
     this.apiClient = apiClient
   }
 
+  createMemo(memoType, memoString) {
+    if("string" !== typeof memoType || "string" !== typeof memoString) {
+      throw new Error("invalid param")
+    }
+
+    let newMemo = new memoService.dataTypes.Memo(memoType, memoString)
+    newMemo.sign(this.cryptoTools())
+
+    return newMemo
+  }
+
   async recordMemo(memoType, memoString) {
     if("string" !== typeof memoType || "string" !== typeof memoString) {
       throw new Error("invalid param")

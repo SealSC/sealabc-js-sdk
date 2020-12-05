@@ -63,6 +63,10 @@ class ED25519 extends Signer {
     return newSigner
   }
 
+  name() {
+    return "ED25519"
+  }
+
   sign(message) {
     message = getMessage(message)
     let sig = nacl.sign.detached(message, this.keyPair.privateKey.u8Array)

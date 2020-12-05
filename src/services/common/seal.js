@@ -70,6 +70,10 @@ class Seal {
 
   matched(message, cryptoTools) {
     let msgHash = cryptoTools.hash.sum(message)
+    if(msgHash.hex !== this.hash.hex) {
+      return false
+    }
+
     return cryptoTools.signer.verify(msgHash.u8Array, this.signature.u8Array, this.publicKey.u8Array)
   }
 }
