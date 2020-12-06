@@ -14,7 +14,6 @@ let requests = {
 let memoService = {
   dataTypes,
   requests,
-
 }
 
 export {

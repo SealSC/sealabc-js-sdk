@@ -1,6 +1,4 @@
-import cryptoJS from "crypto-js";
-import {uint8ArrayToHex, wordArrayToUint8Array} from "../../../../util/converter";
-import {CryptoTools} from "../../../../crypto/tools";
+import {CryptoTools, randomHex} from "../../../../crypto/tools";
 import {TransactionData} from "../dataType/transactionData";
 import {Transaction} from "../dataType/transaction";
 import {newBlockchainRequest} from "../../../system/blockchain/blockchainRequest";
@@ -9,10 +7,7 @@ const smartAssetsAppName = "Smart Assets"
 
 
 function randomSN() {
-  let rw = cryptoJS.lib.WordArray.random(32)
-  let ru8 = wordArrayToUint8Array(rw)
-
-  return uint8ArrayToHex(ru8)
+  return randomHex()
 }
 
 function newTx(tools, type, from, to, value, data = "", memo = "", sn = "") {

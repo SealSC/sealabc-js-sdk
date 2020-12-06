@@ -119,6 +119,7 @@ function Assets() {
     this.symbol = obj.Symbol
     this.increasable = obj.IncomingMessage
     this.supply = obj.Supply
+    this.type = obj.Type
     this.extraData = base64ToString(obj.ExtraInfo)
     this.issuedSeal = Seal.fromPlainObject(obj.IssuedSeal)
     this.metaSeal = Seal.fromPlainObject(obj.MetaSeal)

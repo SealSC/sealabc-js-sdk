@@ -48,6 +48,14 @@ function newQueryAllAssets() {
   }
 }
 
+function newQueryCopyrightList() {
+  return {
+    DBType: "KV",
+    QueryType: "Copyright",
+    Parameter: [],
+  }
+}
+
 function newQuerySellingList() {
   return {
     DBType: "KV",
@@ -60,4 +68,5 @@ export {
   newQueryUnspent,
   newQuerySellingList,
   newQueryAllAssets,
+  newQueryCopyrightList,
 }
