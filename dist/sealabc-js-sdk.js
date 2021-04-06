@@ -43363,7 +43363,13 @@ var ED25519 = /*#__PURE__*/function (_Signer) {
         }
       }
 
-      naclKeyPair = _tweetnacl["default"].sign.keyPair.fromSecretKey(priv);
+      if (priv.length === _tweetnacl["default"].sign.secretKeyLength) {
+        naclKeyPair = _tweetnacl["default"].sign.keyPair.fromSecretKey(priv);
+      } else if (priv.length === _tweetnacl["default"].sign.seedLength) {
+        naclKeyPair = _tweetnacl["default"].sign.keyPair.fromSeed(priv);
+      } else {
+        throw new Error("invalid private key length");
+      }
     }
 
     _this.keyPair = new _signer.KeyPair(naclKeyPair.publicKey, naclKeyPair.secretKey);

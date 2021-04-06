@@ -42,7 +42,13 @@ class ED25519 extends Signer {
         }
       }
 
-      naclKeyPair = nacl.sign.keyPair.fromSecretKey(priv)
+      if(priv.length === nacl.sign.secretKeyLength) {
+        naclKeyPair = nacl.sign.keyPair.fromSecretKey(priv)
+      } else if(priv.length === nacl.sign.seedLength){
+        naclKeyPair = nacl.sign.keyPair.fromSeed(priv)
+      } else {
+        throw new Error("invalid private key length")
+      }
     }
 
     this.keyPair = new KeyPair(naclKeyPair.publicKey, naclKeyPair.secretKey)
