@@ -1,17 +1,25 @@
 {
-  "name": "sealabc-js-sdk",
-  "version": "0.0.1",
-  "description": "javascript sdk for SealABC blockchain framwork.",
+  "name": "@sealsc/sealabc-js-sdk",
+  "version": "0.1.0",
+  "description": "javascript sdk for SealABC blockchain framework.",
   "main": "src/sealabc.js",
   "module": "sealabc-js-sdk",
-  "repository": {},
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "blockchain",
+    "SealABC",
+    "js",
+    "sdk"
+  ],
   "author": "Seal SC",
   "license": "MIT",
   "bugs": {
     "url": ""
   },
-  "homepage": "https://dreamchains.cn",
+  "homepage": "https://sealsc.com",
   "browserify": {
     "transform": [
       [
