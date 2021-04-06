@@ -1,8 +1,8 @@
 {
   "name": "@sealsc/sealabc-js-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "javascript sdk for SealABC blockchain framework.",
-  "main": "src/sealabc.js",
+  "main": "src/sdk.js",
   "module": "sealabc-js-sdk",
   "repository": {
     "type": "git",
