@@ -6,7 +6,7 @@
   "module": "sealabc-js-sdk",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/SealSC/sealabc-js-sdk.git"
   },
   "keywords": [
     "blockchain",
