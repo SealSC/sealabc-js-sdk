@@ -8,11 +8,25 @@ class SmartAssetsOperations extends OperationBase {
     this.apiClient = apiClient
   }
 
+  buildTransferTx(to, amount, memo = '') {
+    let from = this.hexAddress()
+    let req =  smartAssets.requests.newTransferRequest(this.cryptoTools(), from, to, amount, memo)
+
+    return req.toJSON()
+  }
+
   async transferTo(to, amount, memo = '') {
     let from = this.hexAddress()
     let req =  smartAssets.requests.newTransferRequest(this.cryptoTools(), from, to, amount, memo)
 
     return await this.apiClient.callApplication(req.toJSON())
+  }
+
+  buildCreateContractTx(data, value = '0', memo = '') {
+    let creator = this.hexAddress()
+    let req = smartAssets.requests.newContractCreationRequest(this.cryptoTools(), creator, value, data, memo)
+
+    return req.toJSON()
   }
 
   async createContract(data, value = '0', memo = '') {
@@ -22,6 +36,13 @@ class SmartAssetsOperations extends OperationBase {
     return await this.apiClient.callApplication(req.toJSON())
   }
 
+  buildCallContractTx(contract, data, value = '0', memo = '') {
+    let caller = this.hexAddress()
+    let req = smartAssets.requests.newContractCallRequest(this.cryptoTools(), caller, contract, value, data, memo)
+
+    return req.toJSON()
+  }
+
   async callContract(contract, data, value = '0', memo = '') {
     let caller = this.hexAddress()
     let req = smartAssets.requests.newContractCallRequest(this.cryptoTools(), caller, contract, value, data, memo)
@@ -29,10 +50,14 @@ class SmartAssetsOperations extends OperationBase {
     return await this.apiClient.callApplication(req.toJSON())
   }
 
+  buildCallContractOffChainReq(contract, data) {
+    return smartAssets.requests.newContractOffChainCall(this.hexAddress(), contract, data)
+  }
+
   async callContractOffChain(contract, data) {
     let caller = this.hexAddress()
     let req = smartAssets.requests.newContractOffChainCall(caller, contract, data)
-   return await this. apiClient.queryApplication(smartAssetsAppName, req)
+    return await this. apiClient.queryApplication(smartAssetsAppName, req)
   }
 }
 

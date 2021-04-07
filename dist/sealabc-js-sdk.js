@@ -42689,6 +42689,16 @@ var SmartAssetsOperations = /*#__PURE__*/function (_OperationBase) {
   }
 
   (0, _createClass2["default"])(SmartAssetsOperations, [{
+    key: "buildTransferTx",
+    value: function buildTransferTx(to, amount) {
+      var memo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var from = this.hexAddress();
+
+      var req = _smartAssets.smartAssets.requests.newTransferRequest(this.cryptoTools(), from, to, amount, memo);
+
+      return req.toJSON();
+    }
+  }, {
     key: "transferTo",
     value: function () {
       var _transferTo = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(to, amount) {
@@ -42723,6 +42733,17 @@ var SmartAssetsOperations = /*#__PURE__*/function (_OperationBase) {
 
       return transferTo;
     }()
+  }, {
+    key: "buildCreateContractTx",
+    value: function buildCreateContractTx(data) {
+      var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '0';
+      var memo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var creator = this.hexAddress();
+
+      var req = _smartAssets.smartAssets.requests.newContractCreationRequest(this.cryptoTools(), creator, value, data, memo);
+
+      return req.toJSON();
+    }
   }, {
     key: "createContract",
     value: function () {
@@ -42761,6 +42782,17 @@ var SmartAssetsOperations = /*#__PURE__*/function (_OperationBase) {
       return createContract;
     }()
   }, {
+    key: "buildCallContractTx",
+    value: function buildCallContractTx(contract, data) {
+      var value = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '0';
+      var memo = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+      var caller = this.hexAddress();
+
+      var req = _smartAssets.smartAssets.requests.newContractCallRequest(this.cryptoTools(), caller, contract, value, data, memo);
+
+      return req.toJSON();
+    }
+  }, {
     key: "callContract",
     value: function () {
       var _callContract = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(contract, data) {
@@ -42797,6 +42829,11 @@ var SmartAssetsOperations = /*#__PURE__*/function (_OperationBase) {
 
       return callContract;
     }()
+  }, {
+    key: "buildCallContractOffChainReq",
+    value: function buildCallContractOffChainReq(contract, data) {
+      return _smartAssets.smartAssets.requests.newContractOffChainCall(this.hexAddress(), contract, data);
+    }
   }, {
     key: "callContractOffChain",
     value: function () {
