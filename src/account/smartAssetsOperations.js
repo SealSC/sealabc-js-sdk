@@ -59,6 +59,14 @@ class SmartAssetsOperations extends OperationBase {
     let req = smartAssets.requests.newContractOffChainCall(caller, contract, data)
     return await this. apiClient.queryApplication(smartAssetsAppName, req)
   }
+
+  async sendQuery(req) {
+    return await this.apiClient.queryApplication(smartAssetsAppName, req)
+  }
+
+  async sendSignedTransaction(txJSON) {
+    return await this.apiClient.callApplication(txJSON)
+  }
 }
 
 export {

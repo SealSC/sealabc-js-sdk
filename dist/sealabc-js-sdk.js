@@ -42865,6 +42865,62 @@ var SmartAssetsOperations = /*#__PURE__*/function (_OperationBase) {
 
       return callContractOffChain;
     }()
+  }, {
+    key: "sendQuery",
+    value: function () {
+      var _sendQuery = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req) {
+        return _regenerator["default"].wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return this.apiClient.queryApplication(_common.smartAssetsAppName, req);
+
+              case 2:
+                return _context5.abrupt("return", _context5.sent);
+
+              case 3:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function sendQuery(_x8) {
+        return _sendQuery.apply(this, arguments);
+      }
+
+      return sendQuery;
+    }()
+  }, {
+    key: "sendSignedTransaction",
+    value: function () {
+      var _sendSignedTransaction = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(txJSON) {
+        return _regenerator["default"].wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return this.apiClient.callApplication(txJSON);
+
+              case 2:
+                return _context6.abrupt("return", _context6.sent);
+
+              case 3:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function sendSignedTransaction(_x9) {
+        return _sendSignedTransaction.apply(this, arguments);
+      }
+
+      return sendSignedTransaction;
+    }()
   }]);
   return SmartAssetsOperations;
 }(_operationBase.OperationBase);
